@@ -61,3 +61,47 @@ El detalle de cada consulta (SQL, objetivo, archivos fuente, resultado y decisi�
 **Transformación registrada.** No se modifica ningún archivo. La limpieza vive en la vista `viajes_validos` de `sql/00_vistas.sql`, que conserva los viajes con fecha dentro del mes de su archivo, duración entre 1 y 180 minutos, distancia entre 0 y 100 millas, monto total positivo y tarifa no negativa. Conserva el 94.75 % de los amarillos y el 94.63 % de los verdes.
 
 **3.9 Consultar directamente un Parquet.** Significa que DuckDB lee el archivo en su lugar sin importarlo antes. Como Parquet es columnar y guarda estadísticas por grupo de filas, DuckDB lee solo las columnas que pide la consulta y salta los grupos que no pasan los filtros. Con mucho volumen esto evita duplicar los datos en otra base y evita un paso de carga que habría que repetir con cada archivo nuevo. El conteo de 30 millones de filas por metadatos tardó milisegundos y el `SUMMARIZE` completo de los amarillos unos 16 segundos.
+
+## Ejercicio 4. Análisis exploratorio
+
+Las preguntas, consultas, gráficas e interpretación están en `notebooks/02_analisis_exploratorio.ipynb`, con el SQL en `sql/02_eda.sql`. Se ejecutó sobre 2026, con los filtros de `viajes_validos`.
+
+**4.1 Preguntas.** Cómo cambia la demanda por mes, hora y día. Cómo es un viaje típico. Dónde operan amarillos y verdes. Cómo se paga y qué compone el cobro. Cómo se distribuye el monto y cuántos atípicos hay.
+
+**4.5 Hallazgos.**
+
+**Los verdes dependen de pocos barrios.** El 40.27 % de sus recogidas sale de East Harlem North y South. La zona más usada por los amarillos (Upper East Side South) solo concentra el 4.44 %, y el 86.75 % de sus viajes inicia en Manhattan.
+
+**Un cuarto de los viajes amarillos no trae datos del taxímetro.** El 25.01 % de los viajes válidos de 2026 no tiene forma de pago, pasajeros ni tipo de tarifa.
+
+**Los dos servicios tienen ritmos distintos.** El sábado es el día más fuerte de los amarillos, que mantienen actividad hasta medianoche. Los verdes caen 32 % del jueves al domingo y casi no operan de noche.
+
+**La demanda baja en verano.** Los amarillos pasan de 125,810 viajes por día en mayo a 101,723 en agosto.
+
+**El rango intercuartílico sobreestima los atípicos.** Marca el 8.47 % de los amarillos, pero buena parte son viajes al aeropuerto con tarifa fija (mediana de 97.15 dólares). Los atípicos claros, como velocidades mayores a 60 mph o propinas mayores que la tarifa, suman menos del 0.2 %.
+
+## Ejercicio 5. Incorporación de 2024
+
+El detalle está en `notebooks/03_incorporacion_2024.ipynb` y el SQL en `sql/03_incorporacion_anios.sql`.
+
+**5.1 a 5.4.** El único cambio al sistema fue agregar 2024 a `ANIOS` en `scripts/download_data.py`. La ejecución descargó 24 archivos y omitió los 16 de 2026 porque ya existían (`docs/descarga_2024.txt`).
+
+**5.5.** `--verificar` reporta 0 problemas en los 40 archivos y el conteo de la vista coincide con los metadatos en los cuatro grupos de tipo y año.
+
+**5.6.** La consulta conjunta por mes funciona sobre los dos años. Entre enero y agosto los amarillos crecieron entre 6.4 % y 22.6 % de 2024 a 2026 y los verdes cayeron entre 17.9 % y 29.2 %.
+
+**5.7.** No hubo que modificar ninguna consulta para que corriera. El esquema es igual salvo `cbd_congestion_fee` y `request_source`, que no existen en 2024 y quedan nulas gracias a `union_by_name`. Lo que cambia es la interpretación de las consultas que no agrupan por año, porque ahora mezclan 2024 y 2026. Cuando la pregunta es por año se agrega `anio_archivo` al `GROUP BY`.
+
+**5.8.** Las consultas de validación son `archivos_por_anio`, `conteo_metadatos_vs_datos`, `columnas_por_anio`, `tipos_por_anio`, `consulta_conjunta_por_mes` y `resumen_por_anio`.
+
+**5.9 Por qué no hubo que cambiar el flujo.**
+
+**Rutas con comodines.** Las vistas leen `data/raw/<tipo>/*/*.parquet`, así que una carpeta nueva entra sola.
+
+**Año tomado del archivo.** `anio_archivo` y `mes_archivo` se extraen del nombre del archivo, no de una lista escrita en el código.
+
+**Esquema flexible.** `union_by_name = true` tolera columnas que aparecen o desaparecen entre años.
+
+**Una sola definición.** Las vistas y la limpieza viven en `sql/00_vistas.sql`, y todos los notebooks las cargan desde ahí.
+
+**Descarga parametrizada e idempotente.** El año es un parámetro y lo existente se omite, así que agregar un año es cambiar una línea y volver a correr el mismo comando.

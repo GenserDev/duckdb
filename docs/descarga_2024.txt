@@ -1,0 +1,90 @@
+
+=== YELLOW 2024 ===
+  2024-01  descargando...
+  2024-01  listo (47.6 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-01.parquet
+  2024-02  descargando...
+  2024-02  listo (48.0 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-02.parquet
+  2024-03  descargando...
+  2024-03  listo (57.3 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-03.parquet
+  2024-04  descargando...
+  2024-04  listo (56.4 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-04.parquet
+  2024-05  descargando...
+  2024-05  listo (59.7 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-05.parquet
+  2024-06  descargando...
+  2024-06  listo (57.1 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-06.parquet
+  2024-07  descargando...
+  2024-07  listo (49.9 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-07.parquet
+  2024-08  descargando...
+  2024-08  listo (48.7 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-08.parquet
+  2024-09  descargando...
+  2024-09  listo (58.3 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-09.parquet
+  2024-10  descargando...
+  2024-10  listo (61.4 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-10.parquet
+  2024-11  descargando...
+  2024-11  listo (57.8 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-11.parquet
+  2024-12  descargando...
+  2024-12  listo (58.7 MiB) -> data/raw/yellow/2024/yellow_tripdata_2024-12.parquet
+
+=== GREEN 2024 ===
+  2024-01  descargando...
+  2024-01  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-01.parquet
+  2024-02  descargando...
+  2024-02  listo (1.2 MiB) -> data/raw/green/2024/green_tripdata_2024-02.parquet
+  2024-03  descargando...
+  2024-03  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-03.parquet
+  2024-04  descargando...
+  2024-04  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-04.parquet
+  2024-05  descargando...
+  2024-05  listo (1.4 MiB) -> data/raw/green/2024/green_tripdata_2024-05.parquet
+  2024-06  descargando...
+  2024-06  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-06.parquet
+  2024-07  descargando...
+  2024-07  listo (1.2 MiB) -> data/raw/green/2024/green_tripdata_2024-07.parquet
+  2024-08  descargando...
+  2024-08  listo (1.2 MiB) -> data/raw/green/2024/green_tripdata_2024-08.parquet
+  2024-09  descargando...
+  2024-09  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-09.parquet
+  2024-10  descargando...
+  2024-10  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-10.parquet
+  2024-11  descargando...
+  2024-11  listo (1.2 MiB) -> data/raw/green/2024/green_tripdata_2024-11.parquet
+  2024-12  descargando...
+  2024-12  listo (1.3 MiB) -> data/raw/green/2024/green_tripdata_2024-12.parquet
+
+=== YELLOW 2026 ===
+  2026-01  ya existe, se omite
+  2026-02  ya existe, se omite
+  2026-03  ya existe, se omite
+  2026-04  ya existe, se omite
+  2026-05  ya existe, se omite
+  2026-06  ya existe, se omite
+  2026-07  ya existe, se omite
+  2026-08  ya existe, se omite
+  2026-09  aun no publicado por la TLC
+  2026-10  aun no publicado por la TLC
+  2026-11  aun no publicado por la TLC
+  2026-12  aun no publicado por la TLC
+
+=== GREEN 2026 ===
+  2026-01  ya existe, se omite
+  2026-02  ya existe, se omite
+  2026-03  ya existe, se omite
+  2026-04  ya existe, se omite
+  2026-05  ya existe, se omite
+  2026-06  ya existe, se omite
+  2026-07  ya existe, se omite
+  2026-08  ya existe, se omite
+  2026-09  aun no publicado por la TLC
+  2026-10  aun no publicado por la TLC
+  2026-11  aun no publicado por la TLC
+  2026-12  aun no publicado por la TLC
+
+============================================================
+RESUMEN
+============================================================
+  descargados   : 24
+  ya existian   : 16
+  no publicados : 8
+      yellow 2026-09, yellow 2026-10, yellow 2026-11, yellow 2026-12, green 2026-09, green 2026-10, green 2026-11, green 2026-12
+  fallidos      : 0
+============================================================
