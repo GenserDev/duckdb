@@ -43,3 +43,14 @@ docker compose exec lab python scripts/download_data.py --verificar
 Los archivos quedan en `data/raw/<tipo>/<anio>/`. Si se corre de nuevo, solo descarga los meses que falten o que la TLC haya publicado después.
 
 La primera construcción descarga cerca de 3 GB de imágenes. Los datos de 2026 ocupan unos 500 MB.
+
+## Cómo reproducir los benchmarks
+
+**6. Crear la tabla materializada y correr el benchmark**
+
+```bash
+docker compose exec lab python scripts/materializar.py
+docker compose exec lab python scripts/benchmark.py
+```
+
+El primero crea `data/processed/taxis.duckdb` y el segundo `data/processed/benchmark.duckdb` y escribe los tiempos en `docs/benchmark_resultados.csv`. Con los tres años tardan unos minutos y ocupan cerca de 8 GB en disco.

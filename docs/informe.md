@@ -105,3 +105,26 @@ El detalle está en `notebooks/03_incorporacion_2024.ipynb` y el SQL en `sql/03_
 **Una sola definición.** Las vistas y la limpieza viven en `sql/00_vistas.sql`, y todos los notebooks las cargan desde ahí.
 
 **Descarga parametrizada e idempotente.** El año es un parámetro y lo existente se omite, así que agregar un año es cambiar una línea y volver a correr el mismo comando.
+
+## Ejercicio 6. Parquet contra tablas DuckDB
+
+El detalle, la tabla completa y las gráficas están en `notebooks/04_benchmark.ipynb`. El código está en `scripts/materializar.py` y `scripts/benchmark.py`, las consultas en `sql/04_benchmark.sql` y los tiempos en `docs/benchmark_resultados.csv`.
+
+**6.2.** `scripts/materializar.py` crea `data/processed/taxis.duckdb` con la tabla `viajes` (71,870,407 registros de 2024 y 2026) y la tabla `zonas`. Tomó 17.2 segundos y ocupa 2.4 GB, el doble que los Parquet originales.
+
+**6.3 a 6.6.** Se midieron seis consultas sobre tres cantidades de datos (3.8 millones, 30 millones y 71.9 millones de registros), con la mediana de cinco ejecuciones después de un calentamiento.
+
+**6.7 Resultados con todos los registros.**
+
+| Consulta | Parquet (s) | Tabla (s) | Veces más rápida la tabla |
+|---|---|---|---|
+| conteo_total | 0.019 | 0.002 | 9.5 |
+| viajes_por_mes | 0.050 | 0.185 | 0.3 |
+| viajes_por_hora_y_dia | 0.761 | 0.379 | 2.0 |
+| medianas_por_tipo | 6.416 | 6.529 | 1.0 |
+| top_zonas_con_join | 0.532 | 0.391 | 1.4 |
+| filtro_selectivo | 0.205 | 0.044 | 4.7 |
+
+**6.9 Diferencias.** La tabla es más rápida en filtros selectivos y conteos porque su formato interno y sus índices de rango por bloque le permiten saltar más datos. En consultas dominadas por cálculo, como los cuantiles, las dos empatan. La única que gana Parquet es la agregación por mes, porque el mes sale del nombre del archivo. Con poco volumen la diferencia relativa es mayor (12 veces en el filtro selectivo con un mes) porque el costo fijo de abrir los Parquet pesa más.
+
+**6.10 Cuándo usar cada una.** Parquet directo para datos que cambian, exploración y volúmenes que no conviene duplicar. Tabla materializada para consultas repetidas sobre los mismos datos, como un tablero, o cuando una herramienta externa necesita un archivo de base de datos.

@@ -1,0 +1,22 @@
+tamanio,consulta,registros,parquet_s,tabla_s,veces_mas_rapida_tabla
+1 mes (2026-01),(creacion de la tabla),3765161,,1.6001,
+1 mes (2026-01),conteo_total,3765161,0.004,0.0005,8.0
+1 mes (2026-01),viajes_por_mes,3765161,0.0081,0.0498,0.2
+1 mes (2026-01),viajes_por_hora_y_dia,3765161,0.1964,0.0607,3.2
+1 mes (2026-01),medianas_por_tipo,3765161,0.3646,0.3279,1.1
+1 mes (2026-01),top_zonas_con_join,3765161,0.1725,0.0633,2.7
+1 mes (2026-01),filtro_selectivo,3765161,0.0369,0.0027,13.7
+8 meses (2026),(creacion de la tabla),30040469,,5.8015,
+8 meses (2026),conteo_total,30040469,0.0104,0.0014,7.4
+8 meses (2026),viajes_por_mes,30040469,0.0239,0.1311,0.2
+8 meses (2026),viajes_por_hora_y_dia,30040469,0.4202,0.2205,1.9
+8 meses (2026),medianas_por_tipo,30040469,2.8458,2.3564,1.2
+8 meses (2026),top_zonas_con_join,30040469,0.3122,0.2224,1.4
+8 meses (2026),filtro_selectivo,30040469,0.0803,0.0153,5.2
+todos los anios,(creacion de la tabla),71870407,,13.4504,
+todos los anios,conteo_total,71870407,0.0194,0.0024,8.1
+todos los anios,viajes_por_mes,71870407,0.0505,0.1847,0.3
+todos los anios,viajes_por_hora_y_dia,71870407,0.7612,0.3793,2.0
+todos los anios,medianas_por_tipo,71870407,6.4158,6.5288,1.0
+todos los anios,top_zonas_con_join,71870407,0.532,0.3906,1.4
+todos los anios,filtro_selectivo,71870407,0.2049,0.0442,4.6
