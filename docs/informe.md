@@ -128,3 +128,55 @@ El detalle, la tabla completa y las gráficas están en `notebooks/04_benchmark.
 **6.9 Diferencias.** La tabla es más rápida en filtros selectivos y conteos porque su formato interno y sus índices de rango por bloque le permiten saltar más datos. En consultas dominadas por cálculo, como los cuantiles, las dos empatan. La única que gana Parquet es la agregación por mes, porque el mes sale del nombre del archivo. Con poco volumen la diferencia relativa es mayor (12 veces en el filtro selectivo con un mes) porque el costo fijo de abrir los Parquet pesa más.
 
 **6.10 Cuándo usar cada una.** Parquet directo para datos que cambian, exploración y volúmenes que no conviene duplicar. Tabla materializada para consultas repetidas sobre los mismos datos, como un tablero, o cuando una herramienta externa necesita un archivo de base de datos.
+
+## Ejercicio 7. Indicadores y tablero
+
+Las preguntas, la tabla de indicadores con su justificación, las consultas, las gráficas y la interpretación de cada uno están en `notebooks/05_indicadores_y_evolucion.ipynb`. El SQL está en `sql/05_indicadores.sql`.
+
+**7.1 y 7.2.** Se plantearon 12 preguntas y se construyeron 11 indicadores: viajes por día, participación de verdes, monto mediano y costo por milla, composición del cobro, propina con tarjeta, forma de pago, velocidad en Manhattan, viajes desde aeropuertos, distribución por hora, zonas principales y porcentaje de registros válidos.
+
+**7.3 y 7.7 Una sola fuente de SQL.** Los indicadores solo usan `viajes_validos` y `zonas`. Esas dos existen como vistas sobre Parquet y también dentro de `taxis.duckdb` (`scripts/materializar.py` crea la vista ahí). Por eso el SQL de `sql/05_indicadores.sql` es exactamente el que corre en el notebook y en Metabase.
+
+**7.4 y 7.5 Tablero.** `scripts/tablero_metabase.py` usa la API de Metabase para crear la conexión de solo lectura a `taxis.duckdb`, una pregunta SQL por indicador y el tablero con los once indicadores más cuatro valores destacados de 2026. La captura está en `docs/tablero/tablero_metabase.png`.
+
+**Decisión técnica.** La conexión de Metabase usa `memory_limit = 2GB`. Sin ese límite DuckDB intenta usar el 80 % de la memoria de Docker y, al cargar las 16 preguntas a la vez, el contenedor de Metabase se reinició y dañó su base interna.
+
+## Ejercicio 8. Incorporación de 2025 y análisis completo
+
+**8.1 y 8.2.** Se agregó 2025 a `ANIOS`. La corrida descargó 24 archivos y omitió los 40 existentes (`docs/descarga_2025.txt`). `--verificar` reporta 0 problemas en los 64 archivos (`docs/verificacion_final.txt`).
+
+**8.3.** Las consultas de los ejercicios anteriores corren sin cambios sobre 121,184,384 registros. Los conteos de la vista coinciden con los metadatos en los seis grupos de tipo y año.
+
+**8.4.** Los indicadores y el tablero toman los tres años sin modificar el SQL, solo volviendo a correr `materializar.py` y `tablero_metabase.py`.
+
+**8.5 y 8.6 Cambios entre 2024, 2025 y 2026.** Para no comparar años completos contra 2026, que solo llega a agosto, las comparaciones usan enero a agosto de cada año.
+
+**El dato de pago se está perdiendo.** Los viajes amarillos sin forma de pago pasan de 8.79 % a 19.52 % y luego a 25.16 %.
+
+**Los verdes pierden terreno cada año.** Bajan de 1,691 a 1,313 viajes por día (22 % menos), mientras los amarillos suben de 104,216 a 115,845 (11 % más).
+
+**El viaje cuesta más, pero no por milla.** El monto mediano amarillo sube de 20.90 a 23.61 dólares y el costo mediano por milla se mantiene cerca de 11 dólares. La diferencia viene de viajes más largos y del cargo CBD, que desde 2025 paga el 73 % de los viajes amarillos.
+
+**El cargo por congestión no se nota en la velocidad.** La velocidad mediana en Manhattan en horario laboral es 7.81, 7.80 y 7.39 mph.
+
+**La demanda se corre hacia la noche.** Los viajes entre las 22 y las 5 h pasan de 17.45 % a 19.56 %.
+
+**8.7.** Las consultas son las de `sql/03_incorporacion_anios.sql` para validar y las de `sql/05_indicadores.sql` para los resultados.
+
+## Ejercicio 9. Discusión
+
+**9.1 Características más útiles de DuckDB.** Leer Parquet con comodines y `union_by_name`, que permitió crecer de 16 a 64 archivos sin tocar una consulta. Las funciones de metadatos (`parquet_file_metadata` y `parquet_schema`), que validan descargas y esquemas en milisegundos. `SUMMARIZE`, `PIVOT`, `QUALIFY` y `GROUP BY ALL`, que acortan las consultas exploratorias. Y que es un archivo, así que la misma base sirve en Python y en Metabase.
+
+**9.2 Parquet directo.** La ventaja es que no hay paso de carga, los datos no se duplican y un archivo nuevo entra solo. Las limitaciones son que cada consulta paga el costo de abrir los archivos (el filtro selectivo fue 4.7 veces más lento que en la tabla), que las rutas son relativas al directorio desde donde se ejecuta y que una herramienta externa como Metabase no puede usar vistas sobre rutas de otro contenedor.
+
+**9.3 Tablas materializadas.** Son más rápidas para consultas repetidas y filtros, y dan un archivo único para herramientas externas. A cambio ocupan más (4.0 GB contra 2.0 GB de Parquet con los tres años), tardan en crearse (26 segundos) y hay que regenerarlas con cada archivo nuevo. Además un archivo `.duckdb` admite un solo proceso con escritura, lo que obligó a abrirlo en solo lectura desde Metabase.
+
+**9.4 Frente a pandas.** Con pandas habría que cargar 121 millones de filas en memoria, que no caben en los 8 GB del ambiente. DuckDB procesa por bloques, lee solo las columnas que pide cada consulta y entrega a pandas solo resultados agregados de unas decenas de filas.
+
+**9.5 Qué permite incorporar datos con cambios mínimos.** El año como parámetro en el script, la descarga idempotente, las rutas con comodines, el año tomado del nombre del archivo y el esquema flexible. Incorporar 2024 y 2025 fue cambiar una línea cada vez.
+
+**9.6 Qué automatizar en producción.** La descarga mensual con su verificación, la regeneración de `taxis.duckdb` y del tablero, y una alerta cuando cambie el esquema o baje el porcentaje de registros válidos, como pasó en 2025 con los amarillos.
+
+**9.7 Decisiones para la reproducibilidad.** Ambiente en Docker con versiones fijas, datos fuera de Git y descargados por script, SQL en archivos con nombre que los notebooks cargan en lugar de copiar, limpieza como vista en lugar de modificar archivos, y el tablero creado por script en lugar de a mano.
+
+**9.8 Lo que no se habría visto con pocos datos.** Que el formato importa más que el código, porque con un mes cualquier estrategia es instantánea y con 121 millones de filas la memoria y el disco deciden el diseño. Que los problemas de calidad aparecen en la cola (fechas de 2001, distancias de 300 mil millas) y solo se encuentran midiendo, no mirando muestras. Y que los datos cambian con el tiempo, como `request_source` que solo existe en 2026 o el dato de pago que se pierde cada año.

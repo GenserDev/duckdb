@@ -1,0 +1,118 @@
+
+=== YELLOW 2024 ===
+  2024-01  ya existe, se omite
+  2024-02  ya existe, se omite
+  2024-03  ya existe, se omite
+  2024-04  ya existe, se omite
+  2024-05  ya existe, se omite
+  2024-06  ya existe, se omite
+  2024-07  ya existe, se omite
+  2024-08  ya existe, se omite
+  2024-09  ya existe, se omite
+  2024-10  ya existe, se omite
+  2024-11  ya existe, se omite
+  2024-12  ya existe, se omite
+
+=== GREEN 2024 ===
+  2024-01  ya existe, se omite
+  2024-02  ya existe, se omite
+  2024-03  ya existe, se omite
+  2024-04  ya existe, se omite
+  2024-05  ya existe, se omite
+  2024-06  ya existe, se omite
+  2024-07  ya existe, se omite
+  2024-08  ya existe, se omite
+  2024-09  ya existe, se omite
+  2024-10  ya existe, se omite
+  2024-11  ya existe, se omite
+  2024-12  ya existe, se omite
+
+=== YELLOW 2025 ===
+  2025-01  descargando...
+  2025-01  listo (56.4 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-01.parquet
+  2025-02  descargando...
+  2025-02  listo (57.5 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-02.parquet
+  2025-03  descargando...
+  2025-03  listo (66.7 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-03.parquet
+  2025-04  descargando...
+  2025-04  listo (64.2 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-04.parquet
+  2025-05  descargando...
+  2025-05  listo (74.2 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-05.parquet
+  2025-06  descargando...
+  2025-06  listo (70.1 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-06.parquet
+  2025-07  descargando...
+  2025-07  listo (63.8 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-07.parquet
+  2025-08  descargando...
+  2025-08  listo (59.4 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-08.parquet
+  2025-09  descargando...
+  2025-09  listo (69.1 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-09.parquet
+  2025-10  descargando...
+  2025-10  listo (71.8 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-10.parquet
+  2025-11  descargando...
+  2025-11  listo (67.8 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-11.parquet
+  2025-12  descargando...
+  2025-12  listo (70.3 MiB) -> data/raw/yellow/2025/yellow_tripdata_2025-12.parquet
+
+=== GREEN 2025 ===
+  2025-01  descargando...
+  2025-01  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-01.parquet
+  2025-02  descargando...
+  2025-02  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-02.parquet
+  2025-03  descargando...
+  2025-03  listo (1.2 MiB) -> data/raw/green/2025/green_tripdata_2025-03.parquet
+  2025-04  descargando...
+  2025-04  listo (1.2 MiB) -> data/raw/green/2025/green_tripdata_2025-04.parquet
+  2025-05  descargando...
+  2025-05  listo (1.3 MiB) -> data/raw/green/2025/green_tripdata_2025-05.parquet
+  2025-06  descargando...
+  2025-06  listo (1.2 MiB) -> data/raw/green/2025/green_tripdata_2025-06.parquet
+  2025-07  descargando...
+  2025-07  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-07.parquet
+  2025-08  descargando...
+  2025-08  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-08.parquet
+  2025-09  descargando...
+  2025-09  listo (1.2 MiB) -> data/raw/green/2025/green_tripdata_2025-09.parquet
+  2025-10  descargando...
+  2025-10  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-10.parquet
+  2025-11  descargando...
+  2025-11  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-11.parquet
+  2025-12  descargando...
+  2025-12  listo (1.1 MiB) -> data/raw/green/2025/green_tripdata_2025-12.parquet
+
+=== YELLOW 2026 ===
+  2026-01  ya existe, se omite
+  2026-02  ya existe, se omite
+  2026-03  ya existe, se omite
+  2026-04  ya existe, se omite
+  2026-05  ya existe, se omite
+  2026-06  ya existe, se omite
+  2026-07  ya existe, se omite
+  2026-08  ya existe, se omite
+  2026-09  aun no publicado por la TLC
+  2026-10  aun no publicado por la TLC
+  2026-11  aun no publicado por la TLC
+  2026-12  aun no publicado por la TLC
+
+=== GREEN 2026 ===
+  2026-01  ya existe, se omite
+  2026-02  ya existe, se omite
+  2026-03  ya existe, se omite
+  2026-04  ya existe, se omite
+  2026-05  ya existe, se omite
+  2026-06  ya existe, se omite
+  2026-07  ya existe, se omite
+  2026-08  ya existe, se omite
+  2026-09  aun no publicado por la TLC
+  2026-10  aun no publicado por la TLC
+  2026-11  aun no publicado por la TLC
+  2026-12  aun no publicado por la TLC
+
+============================================================
+RESUMEN
+============================================================
+  descargados   : 24
+  ya existian   : 40
+  no publicados : 8
+      yellow 2026-09, yellow 2026-10, yellow 2026-11, yellow 2026-12, green 2026-09, green 2026-10, green 2026-11, green 2026-12
+  fallidos      : 0
+============================================================

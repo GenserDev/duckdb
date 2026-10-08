@@ -34,7 +34,7 @@ from pathlib import Path
 
 import requests
 
-ANIOS = (2024, 2026)
+ANIOS = (2024, 2025, 2026)
 TIPOS_TAXI = ("yellow", "green")
 URL_BASE = "https://d37ci6vzurychx.cloudfront.net/trip-data"
 URL_ZONAS = "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv"
