@@ -1,0 +1,20 @@
+
+archivo                                 servidor       local  estado
+yellow_tripdata_2026-01.parquet         64165080    64165080  ok
+yellow_tripdata_2026-02.parquet         58683353    58683353  ok
+yellow_tripdata_2026-03.parquet         67891249    67891249  ok
+yellow_tripdata_2026-04.parquet         64818115    64818115  ok
+yellow_tripdata_2026-05.parquet         69699174    69699174  ok
+yellow_tripdata_2026-06.parquet         65465637    65465637  ok
+yellow_tripdata_2026-07.parquet         61685033    61685033  ok
+yellow_tripdata_2026-08.parquet         59043961    59043961  ok
+green_tripdata_2026-01.parquet            991656      991656  ok
+green_tripdata_2026-02.parquet            920753      920753  ok
+green_tripdata_2026-03.parquet           1082530     1082530  ok
+green_tripdata_2026-04.parquet           1075896     1075896  ok
+green_tripdata_2026-05.parquet           1102947     1102947  ok
+green_tripdata_2026-06.parquet           1075836     1075836  ok
+green_tripdata_2026-07.parquet           1018250     1018250  ok
+green_tripdata_2026-08.parquet           1007530     1007530  ok
+
+archivos con problemas: 0
